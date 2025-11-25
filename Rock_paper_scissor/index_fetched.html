@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rock Paper Scissors — Play</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="header">
+      <h1>Rock · Paper · Scissors</h1>
+      <p class="tagline">Cute, responsive, and accessible web version</p>
+    </header>
+
+    <section class="game" aria-label="Rock Paper Scissors game">
+      <div class="scoreboard">
+        <div class="score">
+          <div class="label">You</div>
+          <div id="player-score" class="value">0</div>
+        </div>
+        <div class="score">
+          <div class="label">Computer</div>
+          <div id="computer-score" class="value">0</div>
+        </div>
+      </div>
+
+      <div class="match-controls">
+        <label class="toggle">
+          <span class="muted-label">Mode</span>
+          <select id="modeSelect" aria-label="Select match mode">
+            <option value="endless">Endless</option>
+            <option value="best-of-3">Best of 3</option>
+            <option value="best-of-5">Best of 5</option>
+          </select>
+        </label>
+
+        <!-- Single-player only: multiplayer options removed -->
+
+        <label class="toggle">
+          <input id="animToggle" type="checkbox" checked>
+          <span>Animations</span>
+        </label>
+      </div>
+
+      <!-- Hotseat and online controls removed (single-player only) -->
+
+      <div class="choices" role="group" aria-label="Choose your move">
+        <button class="choice" data-choice="rock" aria-label="Choose rock">✊
+          <span class="choice-label">Rock</span>
+        </button>
+        <button class="choice" data-choice="paper" aria-label="Choose paper">✋
+          <span class="choice-label">Paper</span>
+        </button>
+        <button class="choice" data-choice="scissors" aria-label="Choose scissors">✌️
+          <span class="choice-label">Scissors</span>
+        </button>
+      </div>
+
+      <div class="arena" aria-live="polite">
+        <div class="picks">
+          <div class="pick">
+            <div class="who">You</div>
+            <div id="player-pick" class="emoji">—</div>
+          </div>
+          <div class="pick">
+            <div class="who">Computer</div>
+            <div id="computer-pick" class="emoji">—</div>
+          </div>
+        </div>
+
+        <div id="result" class="result">Make your move</div>
+
+        <div class="controls">
+          <button id="reset" class="btn muted">Reset Scores</button>
+          <label class="toggle">
+            <input id="soundToggle" type="checkbox">
+            <span>Sound</span>
+          </label>
+          <label class="toggle">
+            <span class="muted-label">Volume</span>
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Sound volume">
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Match summary modal -->
+    <div id="matchModal" class="modal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <h3 id="modalTitle">Match Summary</h3>
+        <div id="modalBody">...</div>
+        <div class="modal-actions">
+          <button id="modalClose" class="btn">Close</button>
+          <button id="modalReset" class="btn muted">Reset & Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Tip: Use keyboard keys R, P, S to play. Built with ❤️</p>
+    </footer>
+  </main>
+
+  <script src="script.js" defer></script>
+  <!-- Canvas confetti from CDN for smoother animations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <!-- Socket.IO client (served by server when running) -->
+  <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>
